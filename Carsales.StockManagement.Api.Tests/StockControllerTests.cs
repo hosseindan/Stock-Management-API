@@ -22,7 +22,7 @@ namespace Carsales.StockManagement.Api.Tests
             ContextOptions = builder.Options;
         }
         [Fact]
-        public async Task Can_update_Stock_Level()
+        public async Task Can_update_stock_Level()
         {
             using (var context = new CarsalesDbContext(ContextOptions))
             {
@@ -32,16 +32,16 @@ namespace Carsales.StockManagement.Api.Tests
                 dataBuilder.Seed();
                 var updateRequest = new UpdateStockRequest()
                 {
-                    CarId = dataBuilder._carOneId,
+                    CarId = dataBuilder.CarOneId,
                     Quantity = 5,
                     TransactionType=Models.Entities.TransactionType.Increase
                 };
                 //Act
-                var result = await stockController.Put(dataBuilder._dealreId, updateRequest) as OkResult;
+                var result = await stockController.Put(dataBuilder.DealerId, updateRequest) as OkResult;
 
                 //Assert
                 result.StatusCode.Should().Be(200);
-                var actualStock = context.Stocks.FirstOrDefault(c => c.DealerId == dataBuilder._dealreId && c.CarId==dataBuilder._carOneId);
+                var actualStock = context.Stocks.FirstOrDefault(c => c.DealerId == dataBuilder.DealerId && c.CarId==dataBuilder.CarOneId);
                 Assert.Equal(20, actualStock.AvailableStock);
             }
         }
@@ -56,19 +56,20 @@ namespace Carsales.StockManagement.Api.Tests
                 dataBuilder.Seed();
                 var updateRequest = new UpdateStockRequest()
                 {
-                    CarId = dataBuilder._carTwoId,
+                    CarId = dataBuilder.CarTwoId,
                     Quantity = 5,
                     TransactionType = Models.Entities.TransactionType.Increase
                 };
                 //Act
-                var result = await stockController.Put(dataBuilder._dealreId, updateRequest) as OkResult;
+                var result = await stockController.Put(dataBuilder.DealerId, updateRequest) as OkResult;
 
                 //Assert
                 result.StatusCode.Should().Be(200);
-                var actualStock = context.Stocks.FirstOrDefault(c => c.DealerId == dataBuilder._dealreId && c.CarId == dataBuilder._carTwoId);
+                var actualStock = context.Stocks.FirstOrDefault(c => c.DealerId == dataBuilder.DealerId && c.CarId == dataBuilder.CarTwoId);
                 Assert.Equal(updateRequest.Quantity, actualStock.AvailableStock);
             }
         }
+
         private StocksController CreateService() => new DependencyResolver(
            sc =>
            {

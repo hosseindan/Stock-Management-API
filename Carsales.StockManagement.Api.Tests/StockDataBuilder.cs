@@ -11,9 +11,9 @@ namespace Carsales.StockManagement.Api.Tests
 {
     internal class StockDataBuilder
     {
-        public readonly Guid _carOneId = Guid.NewGuid();
-        public readonly Guid _carTwoId = Guid.NewGuid();
-        public readonly Guid _dealreId = Guid.NewGuid();
+        public readonly Guid CarOneId = Guid.NewGuid();
+        public readonly Guid CarTwoId = Guid.NewGuid();
+        public readonly Guid DealerId = Guid.NewGuid();
         protected DbContextOptions<CarsalesDbContext> ContextOptions { get; }
         public StockDataBuilder(DbContextOptions<CarsalesDbContext> contextOptions)
         {
@@ -28,7 +28,7 @@ namespace Carsales.StockManagement.Api.Tests
 
                 var carOne = new Car()
                 {
-                    Id = _carOneId,
+                    Id = CarOneId,
                     Make = "BMW",
                     Model="X2",
                     Year=1999
@@ -37,7 +37,7 @@ namespace Carsales.StockManagement.Api.Tests
 
                 var carTwo = new Car()
                 {
-                    Id = _carTwoId,
+                    Id = CarTwoId,
                     Make = "Toyota",
                     Model = "Kluger",
                     Year = 2020
@@ -48,21 +48,21 @@ namespace Carsales.StockManagement.Api.Tests
                 var stockLevelOne = new Stock()
                 {
                     AvailableStock=5,
-                    CarId= _carOneId,
+                    CarId= CarOneId,
                     DealerId= Guid.NewGuid()
                 };
 
                 var stockLevelTwo = new Stock()
                 {
                     AvailableStock = 15,
-                    CarId = _carOneId,
-                    DealerId = _dealreId
+                    CarId = CarOneId,
+                    DealerId = DealerId
                 };
 
                 var stockLevelThree = new Stock()
                 {
                     AvailableStock = 1,
-                    CarId = _carTwoId,
+                    CarId = CarTwoId,
                     DealerId = Guid.NewGuid()
                 };
                 context.AddRange(stockLevelOne, stockLevelTwo, stockLevelThree);

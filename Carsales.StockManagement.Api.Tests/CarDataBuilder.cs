@@ -11,7 +11,7 @@ namespace Carsales.StockManagement.Api.Tests
 {
     internal class CarDataBuilder
     {
-        private static readonly Guid _id = Guid.NewGuid();
+        private static readonly Guid ValidCarId = Guid.NewGuid();
         protected DbContextOptions<CarsalesDbContext> ContextOptions { get; }
         public CarDataBuilder(DbContextOptions<CarsalesDbContext> contextOptions)
         {
@@ -23,7 +23,7 @@ namespace Carsales.StockManagement.Api.Tests
                 {
                     new  Car()
                         {
-                            Id = _id,
+                            Id = ValidCarId,
                             Make = "BMW",
                             Model = "X3"
                         },
@@ -39,7 +39,7 @@ namespace Carsales.StockManagement.Api.Tests
         {
             return new Car()
             {
-                Id = _id,
+                Id = ValidCarId,
                 Make = "BMW",
                 Model = "X3"
             };
@@ -48,43 +48,11 @@ namespace Carsales.StockManagement.Api.Tests
         {
             return new CreateCarRequest()
             {
-                Id = _id,
+                Id = ValidCarId,
                 Make = "BMW",
-                Model = "X3"
+                Model = "X3",
+                Year=2021
             };
-        }
-        public static UpdateCarRequest GetUpdateCarRequest()
-        {
-            return new UpdateCarRequest()
-            {
-                Make = "BMW",
-                Model = "X4"
-            };
-        }
-        public void Seed()
-        {
-            using (var context = new CarsalesDbContext(ContextOptions))
-            {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-
-                var one = new Car()
-                {
-                    Id = _id,
-                    Make = "BMW",
-                    Model="X2"
-                };
-
-                var two = new Car()
-                {
-                    Id = Guid.NewGuid(),
-                    Make = "Benz"
-                };
-
-                context.AddRange(one, two);
-
-                context.SaveChanges();
-            }
         }
     }
 }

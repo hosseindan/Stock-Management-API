@@ -50,6 +50,25 @@ namespace Carsales.StockManagement.Api.Tests
             }
         }
         [Fact]
+        public async Task Given_invalid_car_to_add_should_return_bad_request()
+        {
+            using (var context = new CarsalesDbContext(ContextOptions))
+            {
+                //Arrange
+                var carController = CreateService();
+                var createCarRequest = new CreateCarRequest()
+                {
+                    Id = Guid.NewGuid()
+                };
+
+                //Act
+                var actionResult = await carController.Post(createCarRequest);
+
+                //Assert
+                actionResult.Should().BeOfType(typeof(BadRequestObjectResult));
+            }
+        }
+        [Fact]
         public async Task Can_delete_car()
         {
             using (var context = new CarsalesDbContext(ContextOptions))
@@ -68,6 +87,7 @@ namespace Carsales.StockManagement.Api.Tests
                 Assert.Null(actualCar);
             }
         }
+
         [Fact]
         public async Task Given_invalid_car_should_return_not_founnd()
         {
@@ -79,7 +99,7 @@ namespace Carsales.StockManagement.Api.Tests
                 await context.SaveChangesAsync();
 
                 //Act
-                var actionResult = await carController.Delete(CarDataBuilder.GetCar().Id) ;
+                var actionResult = await carController.Delete(It.IsAny<Guid>());
 
                 //Assert
                 actionResult.Should().BeOfType(typeof(NotFoundResult));
@@ -100,7 +120,7 @@ namespace Carsales.StockManagement.Api.Tests
                 };
 
                 //Act
-                var actionResult = await carController.Search( searrchRequest);
+                var actionResult = await carController.Search(searrchRequest);
                 var result = actionResult.Result as OkObjectResult;
 
                 //Assert
@@ -110,7 +130,7 @@ namespace Carsales.StockManagement.Api.Tests
             }
         }
         [Fact]
-        public async Task Given_dealer_not_access_another_dealer_stock_levela()
+        public async Task Given_dealer_can_not_access_another_dealer_stock_levels()
         {
             using (var context = new CarsalesDbContext(ContextOptions))
             {
@@ -120,14 +140,14 @@ namespace Carsales.StockManagement.Api.Tests
                 databuilder.Seed();
 
                 //Act
-                var actionResult = await carController.GetCarsAndStockLevels(databuilder._dealreId);
+                var actionResult = await carController.GetCarsAndStockLevels(databuilder.DealerId);
                 var result = actionResult.Result as OkObjectResult;
 
                 //Assert
                 result.StatusCode.Should().Be(200);
                 result.Value.As<List<GetCarStockResponse>>().Count.Should().Be(2);
-                result.Value.As<List<GetCarStockResponse>>().First(f => f.Id == databuilder._carOneId).AvailableStock.Should().Be(15);
-                result.Value.As<List<GetCarStockResponse>>().First(f => f.Id == databuilder._carTwoId).AvailableStock.Should().Be(0);
+                result.Value.As<List<GetCarStockResponse>>().First(f => f.Id == databuilder.CarOneId).AvailableStock.Should().Be(15);
+                result.Value.As<List<GetCarStockResponse>>().First(f => f.Id == databuilder.CarTwoId).AvailableStock.Should().Be(0);
 
             }
         }
