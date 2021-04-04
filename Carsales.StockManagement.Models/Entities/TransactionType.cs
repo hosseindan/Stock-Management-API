@@ -1,8 +1,12 @@
-﻿namespace Carsales.StockManagement.Models.Entities
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace Carsales.StockManagement.Models.Entities
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum TransactionType
     {
-        Receive=0,
-        TransferOut=1
+        Increase=0,//Receive
+        Decrease =1///TransferOut
     }
 }

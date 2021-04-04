@@ -25,9 +25,9 @@ namespace Carsales.StockManagement.Repository
         {
             return await _context.Cars.FirstOrDefaultAsync(p => p.Id == id);
         }
-        public async Task<List<Car>> GetAsync(Guid dealerId, Expression<Func<Car, bool>> searchCriteria)
+        public async Task<List<Car>> GetAsync(Expression<Func<Car, bool>> searchCriteria)
         {
-            return await _context.Cars.Include(x => x.Stocks.Where(s => s.DealerId == dealerId)).Where(searchCriteria).ToListAsync();
+            return await _context.Cars.Where(searchCriteria).ToListAsync();
         }
         public async Task<List<Car>> GetCarsAndStockLevelsAsync(Guid dealerId)
         {

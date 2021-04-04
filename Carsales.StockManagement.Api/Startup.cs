@@ -51,11 +51,11 @@ namespace Carsales.StockManagement
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
                     {
-                        ////c.CustomSchemaIds(x => x.GetCustomAttributes<DisplayNameAttribute>()?.SingleOrDefault()?.DisplayName);
-                        //// Set the comments path for the Swagger JSON and UI.
-                        //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                        //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                        //c.IncludeXmlComments(xmlPath);
+                        //c.CustomSchemaIds(x => x.GetCustomAttributes<DisplayNameAttribute>()?.SingleOrDefault()?.DisplayName);
+                        // Set the comments path for the Swagger JSON and UI.
+                        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                        c.IncludeXmlComments(xmlPath);
                         c.EnableAnnotations();
                     }
             );

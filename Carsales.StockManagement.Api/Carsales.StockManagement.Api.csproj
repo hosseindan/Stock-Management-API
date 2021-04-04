@@ -24,5 +24,11 @@
     <ProjectReference Include="..\Carsales.StockManagement.Services\Carsales.StockManagement.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Carsales.StockManagement.Api.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 
 </Project>

@@ -34,26 +34,26 @@ namespace Carsales.StockManagement.Services
             var carDto = _mapper.Map<GetCarResponse>(car);
             return carDto;
         }
-        public async Task InsertAsync(CreateCarRequest model)
+        public async Task InsertAsync(CreateCarRequest request)
         {
-            var car = _mapper.Map<Car>(model);
+            var car = _mapper.Map<Car>(request);
             await _carRepository.InsertAsync(car);
             await _carRepository.SaveAsync();
         }
-        public async Task UpdateAsync(Guid id, UpdateCarRequest model)
+        public async Task UpdateAsync(Guid id, UpdateCarRequest request)
         {
             var car = await _carRepository.GetAsync(id);
             if (car == null)
                 throw new KeyNotFoundException();
-            car = _mapper.Map<UpdateCarRequest, Car>(model, car);
+            car = _mapper.Map<UpdateCarRequest, Car>(request, car);
             _carRepository.Update(car);
             await _carRepository.SaveAsync();
         }
-        public async Task<List<GetCarStockResponse>> GetAsync(Guid dealerId, CarSearchCriteria searchCriteria)
+        public async Task<List<GetCarResponse>> GetAsync( CarSearchCriteria searchCriteria)
         {
-            var cars = await _carRepository.GetAsync(dealerId ,p => (string.IsNullOrEmpty(searchCriteria.Make) || p.Make.Contains(searchCriteria.Make))
+            var cars = await _carRepository.GetAsync(p => (string.IsNullOrEmpty(searchCriteria.Make) || p.Make.Contains(searchCriteria.Make))
             && (string.IsNullOrEmpty(searchCriteria.Model) || p.Make.Contains(searchCriteria.Model)));
-            var carsDto = _mapper.Map<List<GetCarStockResponse>>(cars);
+            var carsDto = _mapper.Map<List<GetCarResponse>>(cars);
             return carsDto;
         }
         public async Task<List<GetCarStockResponse>> GetCarsAndStockLevelsAsync(Guid dealerId)

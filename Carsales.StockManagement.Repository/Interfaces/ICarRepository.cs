@@ -9,7 +9,7 @@ namespace Carsales.StockManagement.Repository
 {
     public interface ICarRepository  : IRepository<Car>
     {
-        Task<List<Car>> GetAsync(Guid dealerId, Expression<Func<Car, bool>> searchCriteria);
+        Task<List<Car>> GetAsync(Expression<Func<Car, bool>> searchCriteria);
         Task<List<Car>> GetCarsAndStockLevelsAsync(Guid dealerId);
         Task<bool> IsDeletable(Guid id);
     }

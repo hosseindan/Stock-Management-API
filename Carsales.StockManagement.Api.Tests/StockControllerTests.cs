@@ -34,7 +34,7 @@ namespace Carsales.StockManagement.Api.Tests
                 {
                     CarId = dataBuilder._carOneId,
                     Quantity = 5,
-                    TransactionType=Models.Entities.TransactionType.Receive
+                    TransactionType=Models.Entities.TransactionType.Increase
                 };
                 //Act
                 var result = await stockController.Put(dataBuilder._dealreId, updateRequest) as OkResult;
@@ -58,7 +58,7 @@ namespace Carsales.StockManagement.Api.Tests
                 {
                     CarId = dataBuilder._carTwoId,
                     Quantity = 5,
-                    TransactionType = Models.Entities.TransactionType.Receive
+                    TransactionType = Models.Entities.TransactionType.Increase
                 };
                 //Act
                 var result = await stockController.Put(dataBuilder._dealreId, updateRequest) as OkResult;

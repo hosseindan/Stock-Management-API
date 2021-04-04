@@ -20,6 +20,12 @@ namespace Carsales.StockManagement.Api.Controllers
         private readonly ICarService _carService;
         private readonly IValidator<CreateCarRequest> _createCarValidator;
         private readonly IValidator<UpdateCarRequest> _updateCarValidator;
+        /// <summary>
+        /// Used to manage cars
+        /// </summary>
+        /// <param name="carService"></param>
+        /// <param name="createCarValidator"></param>
+        /// <param name="updateCarValidator"></param>
         public CarsController(ICarService carService,
             IValidator<CreateCarRequest> createCarValidator,
             IValidator<UpdateCarRequest> updateCarValidator)
@@ -49,34 +55,6 @@ namespace Carsales.StockManagement.Api.Controllers
         }
 
         /// <summary>
-        /// Used to update the specified car
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="car"></param>
-        /// <returns></returns>
-        [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [Consumes(MediaTypeNames.Application.Json)]
-        public async Task<IActionResult> Put(Guid id, [FromBody] UpdateCarRequest car)
-        {
-            try
-            {
-                var request = _updateCarValidator.Validate(car);
-                if (!request.IsValid)
-                    return BadRequest(request.Errors.Select(e => new { Field = e.PropertyName, Error = e.ErrorMessage }));
-
-                await _carService.UpdateAsync(id, car);
-                return Ok();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-        }
-
-        /// <summary>
         /// Used to delete the specified car
         /// </summary>
         /// <param name="id"></param>
@@ -102,6 +80,7 @@ namespace Carsales.StockManagement.Api.Controllers
                 return BadRequest("there is a transaction that prevents this car from being deleted.");
             }
         }
+
         /// <summary>
         /// Used to get cars and their stock levels for the given dealer id
         /// </summary>
@@ -117,22 +96,43 @@ namespace Carsales.StockManagement.Api.Controllers
         {
             return Ok(await _carService.GetCarsAndStockLevelsAsync(dealerId));
         }
+
         /// <summary>
         ///  Used to find and get list of cars which are matched with given search criteria
         /// </summary>
-        /// <param name="dealerId"></param>
-        /// <param name="carSearchCriteria"></param>
+        /// <param name="carSearchCriteria"> </param>
+        /// <remarks>
+        /// Sample response:
+        ///     [
+        ///         {
+        ///           "Id": "a6d2b4b1-42c4-4da9-9514-1e2e56f38da1",
+        ///           "Make": "Toyota",
+        ///           "Model":"Rav4"
+        ///           "Year": "200"
+        ///         },
+        ///     ]
+        /// </remarks>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<List<GetCarStockResponse>>> Search(Guid dealerId, CarSearchCriteria carSearchCriteria)
+        public async Task<ActionResult<List<GetCarResponse>>> Search(CarSearchCriteria carSearchCriteria)
         {
-            return Ok(await _carService.GetAsync(dealerId, carSearchCriteria));
+            return Ok(await _carService.GetAsync(carSearchCriteria));
         }
 
         /// <summary>
         /// Used to get a car that matches the specified id
         /// </summary>
         /// <param name="id"></param>
+        /// <remarks>
+        /// Sample response:
+        ///
+        ///     {
+        ///       "Id": "a6d2b4b1-42c4-4da9-9514-1e2e56f38da1",
+        ///       "Make": "Toyota",
+        ///       "Model":"Rav4"
+        ///       "Year": "200"
+        ///     }
+        /// </remarks>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

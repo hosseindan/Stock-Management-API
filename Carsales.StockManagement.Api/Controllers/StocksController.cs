@@ -14,6 +14,10 @@ namespace Carsales.StockManagement.Api.Controllers
     public class StocksController : ControllerBase
     {
         private readonly IStockService _stockService;
+        /// <summary>
+        /// Used to manage stock level
+        /// </summary>
+        /// <param name="stockService"></param>
         public StocksController(IStockService stockService)
         {
             _stockService = stockService;
@@ -31,18 +35,6 @@ namespace Carsales.StockManagement.Api.Controllers
         {
             var stock = await _stockService.GetStocksForDealerAndCarAsync(dealerId, carId);
             return Ok(stock);
-        }
-        /// <summary>
-        /// Used to get list of cars and stock levels for the specified dealer
-        /// </summary>
-        /// <param name="dealerId"> Id of dealer </param>
-        /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [HttpGet("Stocks", Name = "GetForDealer")]
-        public async Task<IActionResult> GetForDealer(Guid dealerId)
-        {
-            var stocks = await _stockService.GetStocksForDealerAsync(dealerId);
-            return Ok(stocks);
         }
 
         /// <summary>

@@ -74,8 +74,8 @@ namespace Carsales.StockManagement.Services
         {
             currentStockSnapshot.AvailableStock = newTransaction.TransactionType switch
             {
-                TransactionType.Receive => currentStockSnapshot.AvailableStock + newTransaction.Quantity,
-                TransactionType.TransferOut => currentStockSnapshot.AvailableStock - newTransaction.Quantity,
+                TransactionType.Increase => currentStockSnapshot.AvailableStock + newTransaction.Quantity,
+                TransactionType.Decrease => currentStockSnapshot.AvailableStock - newTransaction.Quantity,
                 _ => throw new NotImplementedException()
             };
         }
