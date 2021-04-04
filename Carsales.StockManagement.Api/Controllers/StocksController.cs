@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Carsales.StockManagement.Models.Contracts;
+﻿using Carsales.StockManagement.Models.Contracts;
 using Carsales.StockManagement.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Carsales.StockManagement.Api.Controllers
 {

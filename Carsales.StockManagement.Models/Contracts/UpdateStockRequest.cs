@@ -1,7 +1,5 @@
 ﻿using Carsales.StockManagement.Models.Entities;
-using Newtonsoft.Json.Converters;
 using System;
-using System.Text.Json.Serialization;
 
 namespace Carsales.StockManagement.Models.Contracts
 {

@@ -1,6 +1,5 @@
 ﻿using Carsales.StockManagement.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace Carsales.StockManagement.Repository
 {

@@ -1,5 +1,4 @@
-﻿using Carsales.StockManagement.Models.Contracts;
-using Carsales.StockManagement.Models.Entities;
+﻿using Carsales.StockManagement.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

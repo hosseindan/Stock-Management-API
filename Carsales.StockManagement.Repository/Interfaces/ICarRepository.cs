@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Carsales.StockManagement.Repository
 {
-    public interface ICarRepository  : IRepository<Car>
+    public interface ICarRepository  : IBaseRepository<Car>
     {
         Task<List<Car>> GetAsync(Expression<Func<Car, bool>> searchCriteria);
         Task<List<Car>> GetCarsAndStockLevelsAsync(Guid dealerId);

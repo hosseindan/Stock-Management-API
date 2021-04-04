@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Carsales.StockManagement.Repository
 {
-    public interface IRepository<T> where T : class
+    public interface IBaseRepository<T> where T : class
     {
         Task<T> GetAsync(Guid id);
         void Delete(T entity);

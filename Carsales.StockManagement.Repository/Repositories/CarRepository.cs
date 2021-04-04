@@ -35,7 +35,7 @@ namespace Carsales.StockManagement.Repository
         }
         public async Task<bool> IsDeletable(Guid id)
         {
-            return !await _context.Stocks.AnyAsync(s=>s.CarId==id);
+            return !await _context.Stocks.AnyAsync(s => s.CarId == id);
         }
         public async Task<Car> InsertAsync(Car entity)
         {

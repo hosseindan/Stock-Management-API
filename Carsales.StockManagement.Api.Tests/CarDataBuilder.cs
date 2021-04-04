@@ -1,7 +1,6 @@
 ﻿using Carsales.StockManagement.Models.Entities;
 using Carsales.StockManagement.Models.VeiwModels;
 using Carsales.StockManagement.Repository;
-using Castle.Components.DictionaryAdapter;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -51,7 +50,7 @@ namespace Carsales.StockManagement.Api.Tests
                 Id = ValidCarId,
                 Make = "BMW",
                 Model = "X3",
-                Year=2021
+                Year = 2021
             };
         }
     }

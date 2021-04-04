@@ -1,26 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Carsales.StockManagement.Api.Controllers;
+using Carsales.StockManagement.Models.Validators;
+using Carsales.StockManagement.Models.VeiwModels;
+using Carsales.StockManagement.Repository;
 using Carsales.StockManagement.Services;
+using Carsales.StockManagement.Services.Interfaces;
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Carsales.StockManagement.Repository;
-using Microsoft.EntityFrameworkCore;
-using Carsales.StockManagement.Services.Interfaces;
-using Carsales.StockManagement.Api.Controllers;
-using FluentValidation;
-using Carsales.StockManagement.Models.VeiwModels;
-using Carsales.StockManagement.Models.Validators;
-using System.Reflection;
+using System;
 using System.IO;
-using System.ComponentModel;
+using System.Reflection;
 
 namespace Carsales.StockManagement
 {

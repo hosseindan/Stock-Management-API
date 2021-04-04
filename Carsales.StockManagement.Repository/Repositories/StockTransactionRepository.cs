@@ -1,9 +1,6 @@
 ﻿using Carsales.StockManagement.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 
@@ -13,7 +10,7 @@ namespace Carsales.StockManagement.Repository
     {
 
         #region Constructor
-        public StockTransactionRepository(CarsalesDbContext context) :base(context)
+        public StockTransactionRepository(CarsalesDbContext context) : base(context)
         {
         }
         #endregion
@@ -32,7 +29,7 @@ namespace Carsales.StockManagement.Repository
         }
         public StockTransaction Update(StockTransaction entity)
         {
-             _context.StockTransactions.Update(entity);
+            _context.StockTransactions.Update(entity);
             return entity;
         }
     }

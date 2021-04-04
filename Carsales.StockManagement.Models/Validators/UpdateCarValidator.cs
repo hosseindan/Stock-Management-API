@@ -3,11 +3,10 @@ using FluentValidation;
 
 namespace Carsales.StockManagement.Models.Validators
 {
-    public class CreateCarValidator : AbstractValidator<CreateCarRequest>
+    public class UpdateCarValidator : AbstractValidator<UpdateCarRequest>
     {
-        public CreateCarValidator()
+        public UpdateCarValidator()
         {
-            RuleFor(x => x.Id).NotEmpty();
             RuleFor(x => x.Make).NotEmpty().MinimumLength(1);
             RuleFor(x => x.Model).NotEmpty().MinimumLength(1);
         }

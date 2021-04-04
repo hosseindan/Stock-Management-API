@@ -1,10 +1,7 @@
 ﻿using Carsales.StockManagement.Models.Entities;
-using Carsales.StockManagement.Models.VeiwModels;
 using Carsales.StockManagement.Repository;
-using Castle.Components.DictionaryAdapter;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 
 
 namespace Carsales.StockManagement.Api.Tests

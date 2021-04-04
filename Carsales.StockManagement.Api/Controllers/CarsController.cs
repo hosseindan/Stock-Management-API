@@ -24,8 +24,8 @@ namespace Carsales.StockManagement.Api.Controllers
         /// Used to manage cars
         /// </summary>
         /// <param name="carService"></param>
-        /// <param name="createCarValidator"></param>
-        /// <param name="updateCarValidator"></param>
+        /// <param name="createCarValidator"> Used to validate incoming requests to create cars</param>
+        /// <param name="updateCarValidator"> Used to validate incoming requests to update cars</param>
         public CarsController(ICarService carService,
             IValidator<CreateCarRequest> createCarValidator,
             IValidator<UpdateCarRequest> updateCarValidator)
@@ -44,7 +44,7 @@ namespace Carsales.StockManagement.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Consumes(MediaTypeNames.Application.Json)]
-        [Description("Used to create a new car")]
+
         public async Task<IActionResult> Post([FromBody] CreateCarRequest car)
         {
             var request = _createCarValidator.Validate(car);
@@ -58,7 +58,11 @@ namespace Carsales.StockManagement.Api.Controllers
         /// Used to delete the specified car
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// If the specified car could be found then 200 is returned
+        /// If the specified car could be found but there is some stock transactions for it  then 400 is retuened
+        /// If the specified car could not be found then 404 is retuened
+        /// </returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -77,7 +81,7 @@ namespace Carsales.StockManagement.Api.Controllers
             }
             catch (InvalidOperationException)
             {
-                return BadRequest("there is a transaction that prevents this car from being deleted.");
+                return BadRequest("there is a stock transaction that prevents this car from being deleted.");
             }
         }
 
@@ -86,9 +90,8 @@ namespace Carsales.StockManagement.Api.Controllers
         /// </summary>
         /// <param name="dealerId"> Id of dealer</param>
         /// <returns>
-        /// If stock levels can be found which are assigned to the dealer then list of <see cref="GetCarStockResponse"/>
-        /// with AvailableStock more than zero are returned
-        /// If no stock level can be found, then list of cars are returned with AvailableStock of zero
+        /// list of <see cref="GetCarStockResponse"/>
+        /// are returned with stock levels of the given dealer
         /// </returns>
         [HttpGet("{dealerId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

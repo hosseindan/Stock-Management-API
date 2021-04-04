@@ -40,9 +40,9 @@ __Way 3__
 1. Clone this repository
         `git clone https://github.com/hosseindan/Stock-Management-API`
 1. Build the image with
-        `docker build -t my-stockmanagement-app .`
+        `docker build -t stockmanagement-app .`
 1. Run the image
-        `docker run -p="2020:80" my-stockmanagement-app`
+        `docker run -p 2020:80 --name my-stockmanagement-app stockmanagement-app`
 
 __Way 4__
 
