@@ -17,7 +17,7 @@ namespace Carsales.StockManagement.Repository
         #endregion
         public async Task<Stock> GetAsync(Guid id)
         {
-            return await _context.Stocks.SingleOrDefaultAsync(s => s.Id == id);
+            return await _context.Stocks.FirstOrDefaultAsync(s => s.Id == id);
         }
         public async Task<List<Stock>> GetStocksForDealerAsync(Guid dealerId)
         {

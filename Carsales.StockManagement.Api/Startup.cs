@@ -34,7 +34,6 @@ namespace Carsales.StockManagement
             services.AddScoped<IStockService, StockService>()
                 .AddScoped<CarsController>()
                 .AddScoped<StocksController>()
-                .AddScoped<IValidator<UpdateCarRequest>, UpdateCarValidator>()
                 .AddScoped<IValidator<CreateCarRequest>, CreateCarValidator>();
             services
                 .Configure<DbSettings>(Configuration)
@@ -44,7 +43,6 @@ namespace Carsales.StockManagement
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
                     {
-                        //c.CustomSchemaIds(x => x.GetCustomAttributes<DisplayNameAttribute>()?.SingleOrDefault()?.DisplayName);
                         // Set the comments path for the Swagger JSON and UI.
                         var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                         var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);

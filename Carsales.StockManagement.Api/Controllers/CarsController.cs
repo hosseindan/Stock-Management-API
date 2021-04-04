@@ -19,20 +19,16 @@ namespace Carsales.StockManagement.Api.Controllers
     {
         private readonly ICarService _carService;
         private readonly IValidator<CreateCarRequest> _createCarValidator;
-        private readonly IValidator<UpdateCarRequest> _updateCarValidator;
         /// <summary>
         /// Used to manage cars
         /// </summary>
         /// <param name="carService"></param>
         /// <param name="createCarValidator"> Used to validate incoming requests to create cars</param>
-        /// <param name="updateCarValidator"> Used to validate incoming requests to update cars</param>
         public CarsController(ICarService carService,
-            IValidator<CreateCarRequest> createCarValidator,
-            IValidator<UpdateCarRequest> updateCarValidator)
+            IValidator<CreateCarRequest> createCarValidator)
         {
             _carService = carService;
             _createCarValidator = createCarValidator;
-            _updateCarValidator = updateCarValidator;
         }
 
         /// <summary>
@@ -57,7 +53,7 @@ namespace Carsales.StockManagement.Api.Controllers
         /// <summary>
         /// Used to delete the specified car
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id"> id of car </param>
         /// <returns>
         /// If the specified car could be found then 200 is returned
         /// If the specified car could be found but there is some stock transactions for it  then 400 is retuened
