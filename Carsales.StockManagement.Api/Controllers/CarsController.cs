@@ -114,35 +114,10 @@ namespace Carsales.StockManagement.Api.Controllers
         /// </remarks>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<List<GetCarResponse>>> Search(CarSearchCriteria carSearchCriteria)
+        public async Task<ActionResult<List<GetCarResponse>>> Search([FromQuery]CarSearchCriteria carSearchCriteria)
         {
             return Ok(await _carService.GetAsync(carSearchCriteria));
         }
 
-        /// <summary>
-        /// Used to get a car that matches the specified id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <remarks>
-        /// Sample response:
-        ///
-        ///     {
-        ///       "Id": "a6d2b4b1-42c4-4da9-9514-1e2e56f38da1",
-        ///       "Make": "Toyota",
-        ///       "Model":"Rav4"
-        ///       "Year": "200"
-        ///     }
-        /// </remarks>
-        /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("{id}", Name = "Get")]
-        public async Task<ActionResult<GetCarResponse>> Get(Guid id)
-        {
-            var car = await _carService.GetAsync(id);
-            if (car == null)
-                return NotFound();
-            return Ok();
-        }
     }
 }

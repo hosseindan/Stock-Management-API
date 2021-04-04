@@ -30,7 +30,7 @@ namespace Carsales.StockManagement.Api.Controllers
         /// <param name="carId">Id of car</param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [HttpGet("cars/{carId}/stocks", Name = "GetForCar")]
+        [HttpGet("cars/{carId}", Name = "GetForCar")]
         public async Task<IActionResult> Get(Guid dealerId, Guid carId)
         {
             var stock = await _stockService.GetStocksForDealerAndCarAsync(dealerId, carId);

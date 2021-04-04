@@ -13,7 +13,6 @@ COPY . .
 WORKDIR "/src/Carsales.StockManagement.Api"
 RUN dotnet build "Carsales.StockManagement.Api.csproj" -c Release -o /app/build
 
-# test
 WORKDIR "/src/Carsales.StockManagement.Api.Tests"
 RUN dotnet test "Carsales.StockManagement.Api.Tests.csproj"
 
