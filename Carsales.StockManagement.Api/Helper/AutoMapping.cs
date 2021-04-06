@@ -21,7 +21,13 @@ namespace Carsales.StockManagement.Api.Helpers
             CreateMap<UpdateStockRequest, Stock>();
             CreateMap<UpdateStockRequest, UpdateStockRequest>();
             CreateMap<UpdateStockRequest, StockTransaction>();
-            CreateMap<Stock, GetStockResponse>();
+            CreateMap<Stock, GetStockResponse>()
+                 .ForMember(c => c.Model, opt => opt.MapFrom(src => src.Car.Model))
+                 .ForMember(c => c.Make, opt => opt.MapFrom(src => src.Car.Make));
+            CreateMap<Stock, GetCarStockResponse>()
+                 .ForMember(c => c.Model, opt => opt.MapFrom(src => src.Car.Model))
+                 .ForMember(c => c.Make, opt => opt.MapFrom(src => src.Car.Make))
+                 .ForMember(c => c.Make, opt => opt.MapFrom(src => src.Car.Year));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Carsales.StockManagement.Models.Contracts;
 using Carsales.StockManagement.Models.Entities;
+using Carsales.StockManagement.Models.VeiwModels;
 using Carsales.StockManagement.Repository;
 using Carsales.StockManagement.Services.Interfaces;
 using System;
@@ -11,15 +12,15 @@ namespace Carsales.StockManagement.Services
 {
     public class StockService : IStockService
     {
-        private readonly IStockTransactionRepository _stockTransactionRepository;
         private readonly IMapper _mapper;
         private readonly IStockRepository _stockRepository;
-        public StockService(IStockTransactionRepository stockTransactionRepository,
-            IStockRepository stockRepository, IMapper mapper)
+        private readonly ICarRepository _carRepository;
+        public StockService(IStockRepository stockRepository, IMapper mapper,
+            ICarRepository carRepository)
         {
-            _stockTransactionRepository = stockTransactionRepository;
             _mapper = mapper;
             _stockRepository = stockRepository;
+            _carRepository = carRepository;
         }
         public async Task<GetStockResponse> GetAsync(Guid id)
         {
@@ -27,26 +28,23 @@ namespace Carsales.StockManagement.Services
             var stockLevel = _mapper.Map<GetStockResponse>(stock);
             return stockLevel;
         }
-        public async Task<List<GetStockResponse>> GetStocksForDealerAsync(Guid dealerId)
+        public async Task<List<GetCarStockResponse>> GetStocksForDealerAsync(Guid dealerId)
         {
-            var stock = await _stockRepository.GetStocksForDealerAsync(dealerId);
-            var stockLevel = _mapper.Map<List<GetStockResponse>>(stock);
+            var stock = await _carRepository.GetCarsAndStockLevelsAsync(dealerId);
+            var stockLevel = _mapper.Map<List<GetCarStockResponse>>(stock);
             return stockLevel;
         }
-        public async Task<GetStockResponse> GetStocksForDealerAndCarAsync(Guid dealerId, Guid carId)
+        public async Task<GetCarStockResponse> GetStocksForDealerAndCarAsync(Guid dealerId, Guid carId)
         {
             var stock = await _stockRepository.GetStocksForDealerAndCarAsync(dealerId, carId);
-            var stockLevel = _mapper.Map<GetStockResponse>(stock);
+            var stockLevel = _mapper.Map<GetCarStockResponse>(stock);
             return stockLevel;
         }
         public async Task UpdateAvailableStock(Guid dealerId, UpdateStockRequest request)
         {
-            //save transaction record in DB
-            var transaction = _mapper.Map<StockTransaction>(request);
-            transaction.DealerId = dealerId;
-            transaction.Id = Guid.NewGuid();
-            await _stockTransactionRepository.InsertAsync(transaction);
-
+            var car = await _carRepository.GetAsync(request.CarId);
+            if (car == null)
+                throw new KeyNotFoundException("There is no car with the given car Id");
             //update and save stock level in DB
             var stock = await _stockRepository.GetStocksForDealerAndCarAsync(dealerId, request.CarId);
 
@@ -63,7 +61,7 @@ namespace Carsales.StockManagement.Services
             }
             else
             {
-                ProcessStockAvailability(stock, transaction);
+                stock.AvailableStock = request.Quantity;
                 _stockRepository.Update(stock);
             }
             await _stockRepository.SaveAsync();

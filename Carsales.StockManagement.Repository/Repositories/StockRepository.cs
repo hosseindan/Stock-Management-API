@@ -21,11 +21,11 @@ namespace Carsales.StockManagement.Repository
         }
         public async Task<List<Stock>> GetStocksForDealerAsync(Guid dealerId)
         {
-            return await _context.Stocks.Include(x => x.Car).Where(s => s.DealerId == dealerId).ToListAsync();
+            return await _context.Stocks.Where(s => s.DealerId == dealerId).Include(x => x.Car).ToListAsync();
         }
         public async Task<Stock> GetStocksForDealerAndCarAsync(Guid dealerId, Guid carId)
         {
-            return await _context.Stocks.Where(s => s.DealerId == dealerId && s.CarId == carId).SingleOrDefaultAsync();
+            return await _context.Stocks.Where(s => s.DealerId == dealerId && s.CarId == carId).FirstOrDefaultAsync();
         }
         public async Task InsertAsync(Stock stock)
         {

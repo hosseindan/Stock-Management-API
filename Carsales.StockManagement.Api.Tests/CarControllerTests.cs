@@ -123,28 +123,7 @@ namespace Carsales.StockManagement.Api.Tests
                 result.Value.As<List<GetCarResponse>>().First().Id.Should().Be(CarDataBuilder.GetCars().First().Id);
             }
         }
-        [Fact]
-        public async Task Given_dealer_can_not_access_another_dealer_stock_levels()
-        {
-            using (var context = new CarsalesDbContext(ContextOptions))
-            {
-                //Arrange
-                var carController = CreateService();
-                var databuilder = new StockDataBuilder(ContextOptions);
-                databuilder.Seed();
-
-                //Act
-                var actionResult = await carController.GetCarsAndStockLevels(databuilder.DealerId);
-                var result = actionResult.Result as OkObjectResult;
-
-                //Assert
-                result.StatusCode.Should().Be(200);
-                result.Value.As<List<GetCarStockResponse>>().Count.Should().Be(2);
-                result.Value.As<List<GetCarStockResponse>>().First(f => f.Id == databuilder.CarOneId).AvailableStock.Should().Be(15);
-                result.Value.As<List<GetCarStockResponse>>().First(f => f.Id == databuilder.CarTwoId).AvailableStock.Should().Be(0);
-
-            }
-        }
+        
         private CarsController CreateService() => new DependencyResolver(
         sc =>
         {

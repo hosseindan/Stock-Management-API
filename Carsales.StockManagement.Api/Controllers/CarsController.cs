@@ -82,21 +82,6 @@ namespace Carsales.StockManagement.Api.Controllers
         }
 
         /// <summary>
-        /// Used to get cars and their stock levels for the given dealer id
-        /// </summary>
-        /// <param name="dealerId"> Id of dealer</param>
-        /// <returns>
-        /// list of <see cref="GetCarStockResponse"/>
-        /// are returned with stock levels of the given dealer
-        /// </returns>
-        [HttpGet("{dealerId}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<List<GetCarStockResponse>>> GetCarsAndStockLevels(Guid dealerId)
-        {
-            return Ok(await _carService.GetCarsAndStockLevelsAsync(dealerId));
-        }
-
-        /// <summary>
         ///  Used to find and get list of cars which are matched with given search criteria
         /// </summary>
         /// <param name="carSearchCriteria"> </param>
@@ -117,6 +102,5 @@ namespace Carsales.StockManagement.Api.Controllers
         {
             return Ok(await _carService.GetAsync(carSearchCriteria));
         }
-
     }
 }
