@@ -27,7 +27,7 @@ namespace Carsales.StockManagement.Api.Helpers
             CreateMap<Stock, GetCarStockResponse>()
                  .ForMember(c => c.Model, opt => opt.MapFrom(src => src.Car.Model))
                  .ForMember(c => c.Make, opt => opt.MapFrom(src => src.Car.Make))
-                 .ForMember(c => c.Make, opt => opt.MapFrom(src => src.Car.Year));
+                 .ForMember(c => c.Year, opt => opt.MapFrom(src => src.Car.Year));
         }
     }
 }

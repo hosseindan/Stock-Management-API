@@ -51,7 +51,7 @@ namespace Carsales.StockManagement.Api.Tests
 
                 //Assert
                 result.StatusCode.Should().Be(200);
-                var actualStock = context.Stocks.FirstOrDefault(c => c.DealerId == dataBuilder.DealerId && c.CarId==dataBuilder.CarOneId);
+                var actualStock = context.Stocks.FirstOrDefault(c => c.DealerId == dataBuilder.DealerId && c.CarId == dataBuilder.CarOneId);
                 Assert.Equal(updateRequest.Quantity, actualStock.AvailableStock);
             }
         }
@@ -111,7 +111,7 @@ namespace Carsales.StockManagement.Api.Tests
            {
                sc.AddSingleton<DbContextOptions<CarsalesDbContext>>(ContextOptions);
            })
-       .GetService<StocksController>();
+            .GetService<StocksController>();
         private void SetUserClaims(StocksController stockController, Guid dealerId)
         {
             //set user claims

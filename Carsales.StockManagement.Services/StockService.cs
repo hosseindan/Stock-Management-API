@@ -30,7 +30,7 @@ namespace Carsales.StockManagement.Services
         }
         public async Task<List<GetCarStockResponse>> GetStocksForDealerAsync(Guid dealerId)
         {
-            var stock = await _carRepository.GetCarsAndStockLevelsAsync(dealerId);
+            var stock = await _stockRepository.GetStocksForDealerAsync(dealerId);
             var stockLevel = _mapper.Map<List<GetCarStockResponse>>(stock);
             return stockLevel;
         }

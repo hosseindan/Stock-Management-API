@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Net.Mime;
-using System.Threading.Tasks;
-using Carsales.StockManagement.Models;
+﻿using Carsales.StockManagement.Models;
 using Carsales.StockManagement.Models.VeiwModels;
 using Carsales.StockManagement.Services;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Mime;
+using System.Threading.Tasks;
 
 namespace Carsales.StockManagement.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class CarsController : ControllerBase
     {
         private readonly ICarService _carService;
