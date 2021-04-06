@@ -100,9 +100,8 @@ namespace Carsales.StockManagement.Api.Tests
 
                 //Assert
                 result.StatusCode.Should().Be(200);
-                result.Value.As<List<GetCarStockResponse>>().Count.Should().Be(2);
-                result.Value.As<List<GetCarStockResponse>>().First(f => f.Id == databuilder.CarOneId).AvailableStock.Should().Be(15);
-                result.Value.As<List<GetCarStockResponse>>().First(f => f.Id == databuilder.CarTwoId).AvailableStock.Should().Be(0);
+                result.Value.As<List<GetCarStockResponse>>().Count.Should().Be(1);
+                result.Value.As<List<GetCarStockResponse>>().First(f => f.CarId == databuilder.CarOneId).AvailableStock.Should().Be(15);
 
             }
         }
