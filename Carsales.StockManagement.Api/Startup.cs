@@ -82,7 +82,6 @@ namespace Carsales.StockManagement
                         });
                     }
             );
-            var tt = Configuration["JwtSecretKey"];
             services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -118,7 +117,6 @@ namespace Carsales.StockManagement
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Stock management API");
                 c.RoutePrefix = "docs";
             });
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
