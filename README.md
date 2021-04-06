@@ -55,7 +55,7 @@ If you want to execute the project without using docker then there is an option 
 1. Once everything is ready, you should be able to access the stock management api via [http://localhost:2020/](http://localhost:2020/)
 1. you can reach swagger page via _http://localhost:2020/docs_.
 1. To authorize and get access to enpoints next steps should be taken
--   ![Get Barear Token](/Document/Step1.PNG?raw=true "Optional Title")
--   ![Copy Barear Token](/Document/Step2.PNG?raw=true "Optional Title")
--   ![Authorize](/Document/Step3.PNG?raw=true "Optional Title")
--   ![Past Barear Token](/Document/Step3.PNG?raw=true "Optional Title")
+-   ![Get Bearer Token](/Document/Step1.PNG "Get Bearer Token")
+-   ![Copy Bearer Token](/Document/Step2.PNG "Copy Bearer Token")
+-   ![Authorize](/Document/Step3.PNG "Authorize")
+-   ![Past Bearer Token](/Document/Step3.PNG "Past Bearer Token")
