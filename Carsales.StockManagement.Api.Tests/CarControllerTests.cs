@@ -123,7 +123,7 @@ namespace Carsales.StockManagement.Api.Tests
                 result.Value.As<List<GetCarResponse>>().First().Id.Should().Be(CarDataBuilder.GetCars().First().Id);
             }
         }
-        
+
         private CarsController CreateService() => new DependencyResolver(
         sc =>
         {
