@@ -40,6 +40,7 @@ namespace Carsales.StockManagement
                 .AddScoped<IStockService, StockService>()
                 .AddScoped<CarsController>()
                 .AddScoped<StocksController>()
+                .AddScoped<AuthenticationController>()
                 .AddScoped<IValidator<CreateCarRequest>, CreateCarValidator>();
             services
                 .Configure<DbSettings>(Configuration)

@@ -66,14 +66,5 @@ namespace Carsales.StockManagement.Services
             }
             await _stockRepository.SaveAsync();
         }
-        private void ProcessStockAvailability(Stock currentStockSnapshot, StockTransaction newTransaction)
-        {
-            currentStockSnapshot.AvailableStock = newTransaction.TransactionType switch
-            {
-                TransactionType.Increase => currentStockSnapshot.AvailableStock + newTransaction.Quantity,
-                TransactionType.Decrease => currentStockSnapshot.AvailableStock - newTransaction.Quantity,
-                _ => throw new NotImplementedException()
-            };
-        }
     }
 }
