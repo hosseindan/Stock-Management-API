@@ -18,8 +18,8 @@ namespace Carsales.StockManagement.Services
         {
             _settings = settings.Value;
             users = new List<UserModel>() {
-            new UserModel(){ UserName="Hossein1" , Password="123", DealerId= Guid.NewGuid() },
-            new UserModel(){ UserName="Hossein2" , Password="1234", DealerId= Guid.NewGuid() }
+            new UserModel(){ UserName="dealer1" , Password="123", DealerId= Guid.NewGuid() },
+            new UserModel(){ UserName="dealer2" , Password="123", DealerId= Guid.NewGuid() }
             };
         }
         public string GetToken(AuthenticationModel authenticationModel)

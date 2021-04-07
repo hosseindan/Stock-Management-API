@@ -58,3 +58,7 @@ If you want to execute the project without using docker then there is an option 
 - Copy Bearer Token  ![Copy Bearer Token](/Document/Step2.PNG "Copy Bearer Token")
 - Authorize  ![Authorize](/Document/Step3.PNG "Authorize")
 - Past Bearer Token  ![Past Bearer Token](/Document/Step4.PNG "Past Bearer Token")
+Or you can leverage login endpoint to get the token 
+Users for testing
+-  Username = dealer1 , password=123
+-  Username = dealer2 , password=123
